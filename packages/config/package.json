@@ -1,0 +1,10 @@
+{
+  "name": "@the-gist/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo 'Config package - no build needed'",
+    "clean": "echo 'Config package - no clean needed'"
+  }
+}

@@ -1,70 +1,101 @@
 # The-Gist
 
-An hybrid news app that runs on web (Next.js) and mobile (React Native + Expo) for Android, iOS, and responsive web.
-
-## 🏗️ Project Structure
-
-```
-The-Gist/
-├── web/              # Next.js web application
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── page.tsx       # Multi-story home page
-│   │   │   ├── layout.tsx     # Root layout with hydration fixes
-│   │   │   └── globals.css    # Global styles
-│   │   ├── components/
-│   │   │   ├── NewsCard.tsx   # News card component for home page
-│   │   │   ├── StoryViewer.tsx # Instagram Stories-style viewer
-│   │   │   └── ClientOnly.tsx # Client-side rendering wrapper
-│   │   └── types/
-│   │       └── news.ts        # Local TypeScript interfaces
-│   ├── next.config.ts         # Next.js configuration with image domains
-│   ├── package.json
-│   └── tsconfig.json
-├── mobile/           # Expo React Native application
-│   ├── App.tsx                # Main app with multi-story home page
-│   ├── components/
-│   │   ├── NewsCard.tsx       # Mobile news card component
-│   │   └── StoryViewer.tsx    # Mobile Instagram Stories viewer
-│   ├── metro.config.js        # Metro config for shared folder access
-│   ├── package.json
-│   └── tsconfig.json
-├── shared/           # Shared types and utilities
-│   ├── types/
-│   │   └── news.ts            # TypeScript interfaces
-│   ├── constants/
-│   │   └── index.ts           # Mock news data and design tokens
-│   ├── data/
-│   └── utils/
-└── # The Gist - AI News App
-
-A cross-platform news application that provides AI-powered summaries of the latest news stories in an Instagram Stories-style interface.
+An AI-powered news app that provides Instagram Stories-style news summaries. Built as a cross-platform monorepo with shared components for web (Next.js) and mobile (React Native + Expo).
 
 ## 🌟 Features
 
-- **Instagram Stories Interface**: Swipe through news stories with auto-advance timers and progress bars
+- **Instagram Stories Interface**: Swipe through news stories with auto-advance timers and smooth progress bars
 - **AI-Powered Summaries**: Get concise, intelligent summaries of news articles
-- **Cross-Platform**: Available on both web and mobile platforms
+- **Cross-Platform**: Available on both web and mobile platforms with shared UI components
 - **Interactive Elements**: Like, follow, and share news stories
 - **Responsive Design**: Optimized for all screen sizes
-- **Card-Based Layout**: Beautiful, modern card design with blurred backgrounds
+- **Card-Based Layout**: Beautiful, modern card design with overlay text and backgrounds
 - **Dark Theme**: Sleek dark interface for comfortable reading
+- **Monorepo Architecture**: Shared code, types, and components across platforms
 
-## 🏗️ Architecture
+## 🏗️ Monorepo Architecture
 
-This is a monorepo containing:
+```
+The-Gist/
+├── apps/                           # Platform-specific applications
+│   ├── web/                       # Next.js web application
+│   │   ├── src/
+│   │   │   ├── app/               # Next.js App Router
+│   │   │   │   ├── page.tsx       # Home page with news grid
+│   │   │   │   ├── layout.tsx     # Root layout
+│   │   │   │   └── globals.css    # Global styles
+│   │   │   └── components/        # Web-specific components
+│   │   │       ├── NewsCard.tsx   # News card component
+│   │   │       ├── StoryViewer.tsx # Instagram Stories viewer
+│   │   │       └── ClientOnly.tsx  # Hydration wrapper
+│   │   ├── next.config.ts         # Next.js configuration
+│   │   ├── tailwind.config.ts     # Tailwind CSS config
+│   │   └── package.json
+│   └── mobile/                    # Expo React Native application
+│       ├── components/            # Mobile-specific components
+│       │   ├── NewsCard.tsx       # Mobile news card
+│       │   └── StoryViewer.tsx    # Mobile Stories viewer
+│       ├── types/                 # TypeScript declarations
+│       │   └── react-native.d.ts  # React Native type fixes
+│       ├── assets/                # App icons and splash screens
+│       ├── App.tsx                # Main app component
+│       ├── index.js               # Expo entry point
+│       ├── app.json               # Expo configuration
+│       ├── metro.config.js        # Metro bundler config
+│       └── package.json
+├── packages/                       # Shared packages
+│   ├── shared/                    # Shared types, constants, and utilities
+│   │   └── src/
+│   │       ├── types/             # TypeScript interfaces
+│   │       ├── constants/         # Mock data and design tokens
+│   │       └── index.ts           # Package exports
+│   ├── ui/                        # Shared UI components and patterns
+│   │   └── src/
+│   │       ├── components/        # Shared component utilities
+│   │       ├── patterns.ts        # Design patterns and layouts
+│   │       ├── utils.ts           # Story controller and utilities
+│   │       ├── types.ts           # UI-specific types
+│   │       └── index.ts           # Package exports
+│   ├── config/                    # Shared configuration
+│   └── assets/                    # Shared assets
+├── package.json                   # Root package.json with workspaces
+├── turbo.json                     # Turborepo configuration
+└── README.md                      # This file
+```
 
-- **`/web`** - Next.js 15.4.4 web application with Turbopack
-- **`/mobile`** - Expo React Native application
-- **`/shared`** - Shared TypeScript types and constants
+### Package Structure
+
+#### `apps/web` - Next.js Web Application
+- **Framework**: Next.js 15.4.4 with Turbopack
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Port**: http://localhost:3000
+
+#### `apps/mobile` - Expo React Native Application  
+- **Framework**: Expo SDK 53+
+- **Language**: TypeScript
+- **React**: 19.0.0 (aligned with web)
+- **Port**: http://localhost:8080
+
+#### `packages/shared` - Shared Types & Logic
+- TypeScript interfaces and types
+- Mock news data and constants
+- Business logic and utilities
+- Cross-platform data models
+
+#### `packages/ui` - Shared UI Components
+- Cross-platform component patterns
+- Shared styling constants and themes
+- Story controller and interaction logic
+- Design patterns and layouts
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm, yarn, or pnpm
-- For mobile development: Expo CLI
+- **Node.js 18.18.0+** (for Next.js compatibility)
+- **npm** (comes with Node.js)
+- **Expo Go app** on your mobile device (for testing mobile app)
 
 ### Installation
 
@@ -74,112 +105,217 @@ This is a monorepo containing:
    cd The-Gist
    ```
 
-2. **Install web dependencies**
+2. **Install all dependencies**
    ```bash
-   cd web
    npm install
    ```
+   This installs dependencies for all packages and apps using npm workspaces.
 
-3. **Install mobile dependencies**
-   ```bash
-   cd ../mobile
-   npm install
-   ```
+## 🖥️ Running the Applications
 
-### Running the Applications
+### Option 1: Run Both Apps Simultaneously
 
-#### Web Application
 ```bash
-cd web
+# Start both web and mobile development servers
 npm run dev
 ```
-The web app will be available at `http://localhost:3000`
 
-#### Mobile Application
+This will start:
+- **Web app**: http://localhost:3001
+- **Mobile app**: http://localhost:8082 (with QR code for Expo Go)
+
+### Option 2: Run Apps Individually
+
+#### Web Application Only
 ```bash
-cd mobile
+# Run web app only
+npm run web:dev
+
+# Or navigate to web directory
+cd apps/web
+npm run dev
+```
+- **URL**: http://localhost:3001
+- **Features**: Full desktop experience with responsive design
+
+#### Mobile Application Only
+```bash
+# Run mobile app only
+npm run mobile:dev
+
+# Or navigate to mobile directory
+cd apps/mobile
 npx expo start
 ```
-Scan the QR code with Expo Go app or run on simulator
+- **URL**: http://localhost:8080
+- **QR Code**: Scan with Expo Go app on your phone
+- **Simulators**: Press `i` for iOS simulator, `a` for Android
 
-## 📱 Usage
+### Testing on Mobile Device
+
+1. **Install Expo Go** on your phone:
+   - [iOS App Store](https://apps.apple.com/app/expo-go/id982107779)
+   - [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
+
+2. **Start the mobile development server**:
+   ```bash
+   npm run mobile:dev
+   ```
+
+3. **Scan the QR code** that appears in your terminal with:
+   - **iOS**: Camera app or Expo Go app
+   - **Android**: Expo Go app
+
+## 🎯 Usage
 
 1. **Browse News**: View news stories in a grid layout on the home page
 2. **Story Mode**: Tap any news card to enter Instagram Stories-style viewer
 3. **Navigation**: 
-   - Tap left/right sides to navigate between stories
+   - **Web**: Click left/right sides of story, use arrow keys, or ESC to close
+   - **Mobile**: Tap left/right sides, hold to pause auto-advance
    - Stories auto-advance every 5 seconds
-   - Hold to pause auto-advance
 4. **Interactions**:
-   - ❤️ Like stories
-   - 👥 Follow news sources
-   - 📤 Share stories
-   - ⋯ Access menu options
+   - ❤️ **Like**: Tap heart icon (turns red when liked)
+   - 👥 **Follow**: Tap follow button (toggles following state)
+   - 📤 **Share**: Tap share icon (logs to console)
+   - ⋯ **Menu**: Access additional options
 
-## 🛠️ Tech Stack
+## 🛠️ Development
 
-### Web
-- **Framework**: Next.js 15.4.4 with Turbopack
-- **Styling**: Tailwind CSS
-- **Language**: TypeScript
-- **Build**: Turbopack for fast development builds
+### Building for Production
 
-### Mobile  
-- **Framework**: Expo SDK 51+
-- **Language**: TypeScript
-- **Navigation**: React Native components
-- **Styling**: React Native StyleSheet
+```bash
+# Build all packages and apps
+npm run build
 
-### Shared
-- **Types**: Shared TypeScript interfaces
-- **Constants**: Centralized app constants
-- **Data**: Mock news data structure
-
-## 📁 Project Structure
-
-```
-The-Gist/
-├── web/                    # Next.js web application
-│   ├── src/
-│   │   ├── app/           # App router pages
-│   │   ├── components/    # React components
-│   │   └── types/         # TypeScript types
-│   ├── public/            # Static assets
-│   └── package.json
-├── mobile/                # Expo React Native app
-│   ├── components/        # React Native components
-│   ├── assets/           # App icons and images
-│   └── package.json
-├── shared/               # Shared code
-│   ├── types/           # Shared TypeScript types
-│   └── constants/       # App constants
-└── README.md
+# Build specific apps
+npm run web:build    # Web production build
+npm run mobile:build # Mobile production build
 ```
 
-## 🎨 Design Features
+### Code Structure
 
-- **Consistent Branding**: "The Gist" attribution across platforms
-- **Blurred Backgrounds**: Dynamic blurred image backgrounds for immersive experience
-- **Card-Based Design**: Rounded corner cards with image/text layout
-- **Cross-Platform Consistency**: Matching UI/UX between web and mobile
-- **Interactive Animations**: Smooth transitions and hover effects
-- **Progress Indicators**: Visual progress bars for story advancement
+```bash
+# Shared types and constants
+packages/shared/src/types/news.ts          # NewsItem, StoryViewer interfaces
+packages/shared/src/constants/index.ts     # MOCK_NEWS_DATA, design tokens
 
-## 🚧 Development
+# Shared UI patterns
+packages/ui/src/patterns.ts                # Layout patterns, formatting
+packages/ui/src/utils.ts                   # StoryController class
+packages/ui/src/components/                # Cross-platform utilities
 
-### Adding New Features
+# Platform implementations
+apps/web/src/components/NewsCard.tsx       # Web news card with Tailwind
+apps/mobile/components/NewsCard.tsx        # Mobile news card with StyleSheet
+```
 
-1. **Shared Types**: Add new interfaces to `/shared/types/`
-2. **Constants**: Update `/shared/constants/` for app-wide settings
-3. **Web Components**: Add to `/web/src/components/`
-4. **Mobile Components**: Add to `/mobile/components/`
+### Package Scripts
 
-### Code Style
+```bash
+# Root level commands
+npm run dev          # Start all apps in development
+npm run build        # Build all packages and apps
+npm run lint         # Lint all code
+npm run clean        # Clean all build artifacts
 
-- TypeScript for type safety
-- Consistent component structure
-- Shared types between platforms
-- Responsive design principles
+# Individual app commands
+npm run web:dev      # Web development server
+npm run web:build    # Web production build
+npm run mobile:dev   # Mobile Expo development server
+npm run mobile:build # Mobile production build
+```
+
+## 🎨 Shared Design System
+
+### Colors
+- **Primary**: `#000000` (Black)
+- **Secondary**: `#1a1a1a` (Dark Gray)
+- **Accent**: `#ff3040` (Red for likes)
+- **Text**: White with opacity variants
+
+### Layout Constants
+- **Card Max Width**: 350px
+- **Story Duration**: 5 seconds per story
+- **Progress Animation**: Smooth 60fps using React Native Animated
+- **Border Radius**: 16px for cards, 12px for overlays
+- **Spacing**: 16px, 20px standard spacing
+
+### Components
+- **NewsCard**: Shared layout with platform-specific styling
+- **StoryViewer**: Instagram Stories interface with progress bars
+- **Progress Bars**: Smooth animated progress indicators
+- **Interactive Controls**: Like, Follow, Share with state management
+
+## 📁 Package Dependencies
+
+The monorepo uses npm workspaces with the following dependency structure:
+
+```mermaid
+graph TD
+    A[apps/web] --> B[packages/shared]
+    A --> C[packages/ui]
+    
+    D[apps/mobile] --> B
+    D --> C
+    
+    C --> B
+```
+
+All apps import shared packages using:
+```typescript
+import { NewsItem, MOCK_NEWS_DATA } from '@the-gist/shared';
+import { formatNewsCardContent } from '@the-gist/ui';
+```
+
+## 🔧 Technical Stack
+
+### Frontend Frameworks
+- **Web**: Next.js 15.4.4 with Turbopack and App Router
+- **Mobile**: Expo SDK 53+ with React Native 0.79.5
+- **Shared**: React 19.0.0 across all platforms
+
+### Development Tools
+- **Monorepo**: Turborepo for build orchestration and caching
+- **Package Manager**: npm workspaces for dependency management
+- **Language**: TypeScript with strict mode
+- **Styling**: Tailwind CSS (web) + StyleSheet (mobile)
+
+### Build System
+- **Web**: Next.js build system with Turbopack
+- **Mobile**: Metro bundler with workspace support
+- **Shared**: TypeScript compilation with watch mode
+- **Caching**: Turborepo handles dependency caching
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **"Invalid hook call" errors**:
+   ```bash
+   # Clear all caches and reinstall
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+2. **Metro bundler can't resolve shared packages**:
+   ```bash
+   # Clear Metro cache
+   cd apps/mobile
+   npx expo start --clear
+   ```
+
+3. **TypeScript errors in React Native components**:
+   - The project includes type fixes in `apps/mobile/types/react-native.d.ts`
+   - Components use `// @ts-nocheck` for React 19 compatibility
+
+4. **Port conflicts**:
+   - Web app runs on port 3001 (if 3000 is occupied)
+   - Mobile app runs on port 8082 (if 8081 is occupied)
+
+### Node.js Version
+- **Required**: Node.js 18.18.0+ for optimal Next.js compatibility
+- **Current**: The project is tested with Node.js 18.x and 20.x
 
 ## 📄 License
 
@@ -191,240 +327,13 @@ Created by [oliviahe0111](https://github.com/oliviahe0111)
 
 ---
 
-*The Gist - Your AI-powered news summary* ✨         # This file
-```
+## 🎯 Project Highlights
 
-## 🚀 Quick Start
+✅ **Cross-Platform Compatibility**: Single codebase with shared logic  
+✅ **Instagram Stories Experience**: Full-featured story viewer with progress bars  
+✅ **Type Safety**: End-to-end TypeScript with shared interfaces  
+✅ **Performance**: Smooth 60fps animations using React Native Animated  
+✅ **Developer Experience**: Hot reload, TypeScript compilation, and build caching  
+✅ **Responsive Design**: Works seamlessly on desktop, mobile web, and native mobile  
 
-### Prerequisites
-- Node.js 18.18.0+ (for Next.js compatibility)
-- npm or yarn
-- Expo CLI (optional, for mobile development)
-- Expo Go app on your mobile device (for testing)
-
-### Web Application (Next.js)
-
-1. Navigate to the web directory:
-   ```bash
-   cd web
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-### Mobile Application (Expo)
-
-1. Navigate to the mobile directory:
-   ```bash
-   cd mobile
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the Expo development server:
-   ```bash
-   npm start
-   ```
-
-4. Scan the QR code with:
-   - **iOS**: Camera app or Expo Go app
-   - **Android**: Expo Go app
-
-## 📱 Features
-
-### ✅ Implemented Features
-
-- **Instagram Stories-Style News Viewer**: 
-  - Auto-advancing stories (5 seconds each)
-  - Progress bars showing story progression
-  - Tap navigation (left/right) and keyboard controls
-  - Like, Share, and Follow interactive buttons
-  - Pause on hold/press functionality
-
-- **Multi-Story Home Page**:
-  - Grid layout displaying multiple news stories
-  - Click/tap any story to enter Instagram Stories mode
-  - Responsive design for both web and mobile
-
-- **Hybrid Architecture**: Separate web and mobile apps with shared data structure
-- **Responsive Design**: 
-  - Desktop web: Centered story viewer (max-width mobile-style)
-  - Mobile web & native: Full-screen immersive experience
-- **Dynamic Content**: All content from shared JSON data source
-- **Cross-Platform UI**: Consistent Instagram Stories experience across platforms
-- **TypeScript**: Full type safety with shared interfaces
-
-### 🎨 Instagram Stories Design Implementation
-
-- **Story Viewer Component**: 
-  - Full-screen overlay with background image
-  - Progress bars at the top showing story sequence
-  - Source name and close/menu buttons in header
-  - Story title and summary text overlay
-  - Bottom action buttons (Like, Follow, Share)
-  - Auto-advance timer with smooth transitions
-
-- **Navigation Controls**:
-  - **Tap Navigation**: Left side = previous, right side = next
-  - **Keyboard**: Arrow keys for navigation, Escape to close
-  - **Touch**: Hold to pause, release to resume
-  - **Buttons**: Like (heart), Follow (toggle), Share, Menu
-
-- **Multi-Story Home Page**:
-  - **Desktop**: Responsive grid of news cards
-  - **Mobile**: Vertical scrolling list
-  - **Interaction**: Click/tap any card to start story sequence
-
-## 📊 JSON Data Structure
-
-The app uses the following JSON structure for news content with 5 different stories:
-
-```json
-{
-  "id": "1",
-  "image_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-  "pubDate": "2024-07-29 14:30:00",
-  "publishedDate": 1722265800000,
-  "title": "Canada pledges additional weapons to Ukraine during surprise visit",
-  "summary": "Prime Minister Trudeau, during an unannounced trip to Kyiv, announces Canada's commitment to send more weapons to Ukraine...",
-  "source": "National Post",
-  "category": "Politics"
-}
-```
-
-### Mock Data Sources
-- **5 Different News Stories** from various sources:
-  - National Post (Politics)
-  - TechCrunch (Technology) 
-  - BBC News (Science)
-  - Financial Times (Finance)
-  - MIT Technology Review (Technology)
-
-### Design Tokens
-- **Colors**: Primary, secondary, background, text colors
-- **Spacing**: XS(4px) to XL(32px) standardized spacing
-- **Border Radius**: Small, medium, large radius values
-- **Breakpoints**: Mobile (768px), Desktop (1024px)
-
-## 🛠️ Technical Stack
-
-### Web (Next.js)
-- **Framework**: Next.js 15.4.4 with App Router and Turbopack
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Image Optimization**: Next.js Image component with remote patterns
-- **Responsive Design**: Tailwind responsive utilities
-- **Configuration**: Custom webpack aliases for shared folder imports
-
-### Mobile (Expo/React Native)
-- **Framework**: Expo SDK 51+
-- **Language**: TypeScript  
-- **Navigation**: React Native core components with Instagram Stories navigation
-- **Styling**: StyleSheet with responsive design
-- **Image Handling**: React Native Image component
-- **Metro Config**: Custom configuration for shared folder resolution
-
-### Shared
-- **Type Safety**: Shared TypeScript interfaces for NewsItem, StoryViewer props
-- **Mock Data**: 5 different news stories with consistent data structure
-- **Design Tokens**: Consistent spacing, colors, breakpoints, and sizing
-- **Cross-Platform**: Metro config (mobile) and webpack alias (web) for shared imports
-
-## 🔧 Development Notes
-
-### Node.js Version
-- **Required**: Node.js 18.18.0+ for Next.js compatibility
-- **Current Issue**: If using Node.js 18.13.0, you may encounter compatibility warnings
-
-### TypeScript Configuration
-- **Web**: Path aliases configured for `@/*` (src folder), local types for compatibility
-- **Mobile**: Metro config for shared folder access, relative imports to shared constants
-- **Shared**: Common interfaces and data structure used by both platforms
-
-### Cross-Platform Considerations
-- **Styling**: Web uses Tailwind CSS classes, Mobile uses StyleSheet
-- **Images**: Web uses Next.js Image with optimization, Mobile uses React Native Image  
-- **Layout**: Web uses flexbox with CSS Grid, Mobile uses React Native flexbox
-- **Navigation**: Web uses click events, Mobile uses touch events
-- **Stories Implementation**: Consistent auto-advance, progress bars, and controls across platforms
-
-### Instagram Stories Features
-- **Auto-Advance**: 5-second timer per story with smooth transitions
-- **Progress Indicators**: Multi-segment progress bars showing current story position  
-- **Touch/Click Navigation**: Left/right tap zones for story navigation
-- **Interactive Controls**: Like (heart with animation), Follow (toggle state), Share buttons
-- **Keyboard Support**: Arrow keys for navigation, Escape to exit (web only)
-- **Pause/Resume**: Hold to pause story progression, release to continue
-
-## 🎯 Design Requirements Met
-
-- ✅ **Instagram Stories Experience**: Full implementation with auto-advance, navigation, and controls
-- ✅ **Multi-Story Home Page**: Grid layout with story selection functionality  
-- ✅ **From Scratch**: Both apps built without templates
-- ✅ **UI Implementation**: Instagram Stories-style interface with progress bars and interactions
-- ✅ **Responsive**: Mobile-first design with consistent experience across platforms
-- ✅ **Dynamic Content**: All content from shared JSON, no hardcoded text
-- ✅ **Hybrid Architecture**: Optimized apps for web and mobile with shared data structure
-- ✅ **Interactive Controls**: Like, Share, Follow buttons with state management
-- ✅ **Cross-Platform Navigation**: Touch/click controls working on both platforms
-
-## 🚨 Known Issues
-
-1. **Node.js Version**: Requires Node.js 18.18.0+ for optimal Next.js compatibility
-2. **Hydration Warnings**: Resolved with suppressHydrationWarning for browser extensions
-3. **Image Domains**: Configured for Unsplash and other news image sources
-4. **Module Resolution**: Uses relative imports for better compatibility across platforms
-
-## 📈 Future Enhancements
-
-- [ ] Add swipe gestures for mobile story navigation
-- [ ] Implement actual sharing functionality (Web Share API)
-- [ ] Add story reactions and comments
-- [ ] Support for video stories
-- [ ] API integration for dynamic news fetching
-- [ ] User preferences and followed sources
-- [ ] Dark mode support
-- [ ] Accessibility improvements (screen reader support)
-- [ ] Story analytics and engagement tracking
-
-## 💡 Testing
-
-### Web Testing
-1. **Desktop**: Open http://localhost:3000, test Instagram Stories navigation with clicks and keyboard
-2. **Mobile Web**: Use browser dev tools mobile simulation
-3. **Story Features**: Test auto-advance, progress bars, like/follow buttons, pause on hold
-4. **Navigation**: Verify left/right click zones, arrow keys, escape to close
-
-### Mobile Testing  
-1. **iOS**: Use Expo Go app to scan QR code
-2. **Android**: Use Expo Go app to scan QR code
-3. **Story Features**: Test touch navigation, auto-advance, interactive buttons
-4. **Gestures**: Verify left/right tap zones, hold to pause functionality
-
-### Instagram Stories Testing Checklist
-- [ ] Stories auto-advance after 5 seconds
-- [ ] Progress bars show current story position
-- [ ] Left/right navigation works (tap zones on mobile, clicks on web)
-- [ ] Like button toggles heart color (red when liked)
-- [ ] Follow button toggles text and styling
-- [ ] Share button logs story title (placeholder)
-- [ ] Menu button shows (placeholder functionality)
-- [ ] Hold/pause functionality works
-- [ ] Keyboard controls work on web (arrow keys, escape)
-- [ ] Stories close properly when sequence ends
-
----
-
-**Built with ❤️ for Instagram Stories-style hybrid app development**
+*The Gist - Your AI-powered news companion* ✨

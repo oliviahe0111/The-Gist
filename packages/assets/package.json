@@ -1,0 +1,10 @@
+{
+  "name": "@the-gist/assets",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo 'Assets package - no build needed'",
+    "clean": "echo 'Assets package - no clean needed'"
+  }
+}
