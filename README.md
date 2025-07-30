@@ -294,7 +294,7 @@ import { formatNewsCardContent } from '@the-gist/ui';
 1. **"Invalid hook call" errors**:
    ```bash
    # Clear all caches and reinstall
-   rm -rf node_modules package-lock.json
+   rm -rf node_modules package-lock.json .turbo .next apps/web/.next apps/mobile/.expo
    npm install
    ```
 

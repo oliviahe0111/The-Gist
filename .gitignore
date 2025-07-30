@@ -12,12 +12,25 @@ build/
 dist/
 out/
 
+# Cache directories
+.cache/
+.parcel-cache/
+.vite/
+
 # Next.js
+.next/
+apps/web/.next/
 web/.next/
 web/out/
+out/
+
+# Turborepo
+.turbo/
 
 # Expo
+.expo/
 mobile/.expo/
+apps/mobile/.expo/
 mobile/dist/
 *.orig.*
 web-build/
