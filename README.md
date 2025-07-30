@@ -321,10 +321,6 @@ import { formatNewsCardContent } from '@the-gist/ui';
 
 This project is licensed under the MIT License.
 
-## 👨‍💻 Author
-
-Created by [oliviahe0111](https://github.com/oliviahe0111)
-
 ---
 
 ## 🎯 Project Highlights
