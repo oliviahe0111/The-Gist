@@ -75,7 +75,7 @@ The-Gist/
 - **Framework**: Expo SDK 53+
 - **Language**: TypeScript
 - **React**: 19.0.0 (aligned with web)
-- **Port**: http://localhost:8080
+- **Port**: http://localhost:8081
 
 #### `packages/shared` - Shared Types & Logic
 - TypeScript interfaces and types
@@ -122,7 +122,7 @@ npm run dev
 
 This will start:
 - **Web app**: http://localhost:3001
-- **Mobile app**: http://localhost:8082 (with QR code for Expo Go)
+- **Mobile app**: http://localhost:8081 (with QR code for Expo Go)
 
 ### Option 2: Run Apps Individually
 
@@ -147,7 +147,7 @@ npm run mobile:dev
 cd apps/mobile
 npx expo start
 ```
-- **URL**: http://localhost:8080
+- **URL**: http://localhost:8081
 - **QR Code**: Scan with Expo Go app on your phone
 - **Simulators**: Press `i` for iOS simulator, `a` for Android
 
@@ -311,7 +311,7 @@ import { formatNewsCardContent } from '@the-gist/ui';
 
 4. **Port conflicts**:
    - Web app runs on port 3001 (if 3000 is occupied)
-   - Mobile app runs on port 8082 (if 8081 is occupied)
+   - Mobile app runs on port 8081 (default Expo port)
 
 ### Node.js Version
 - **Required**: Node.js 18.18.0+ for optimal Next.js compatibility
